@@ -1,16 +1,16 @@
-ersion: 2.1
+version: 2.1
 
 workflows:
   version: 2
   build-deploy:
     jobs:
-      - unit-test
-      - publish-docker:
+      - compile-build
+      - fod-sast:
           requires:
-            - unit-test
+            - compile-build
 
 jobs:
-  build:
+  compile-build:
     docker:
       - image: circleci/openjdk:8-jdk
     working_directory: ~/repo
@@ -44,14 +44,8 @@ jobs:
             - hello-spring-mvn-V2
       - run: mvn dependency:go-offline
       - run:
-          name: Build 
+          name: FoD SAST Using fortify-ci-tools 
           command: |
-            mvn clean compile
-      - save_cache:
-          paths:
-           - ~/.m2
-          key: hello-spring-mvn-V2-{{ checksum "pom.xml" }}
-      - store_test_results:
-          path: target/surefire-reports
+            scancentral package -bt mvn -o package.zip 
 
   

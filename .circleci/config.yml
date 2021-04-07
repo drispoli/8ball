@@ -53,7 +53,7 @@ jobs:
             FOD_URL="https://ams.fortify.com"
             FOD_API_URL="https://api.ams.fortify.com/"
             FOD_UPLOADER_OPTS="-ep 2 -pp 0"
-            FOD_NOTES="Triggered by CircleCI Pipeline $CIRCLE_PROJECT_USERNAME - $CIRCLE_BRANCH"
+            FOD_NOTES="Triggered by CircleCI Pipeline $CIRCLE_PROJECT_REPONAME - $CIRCLE_BRANCH"
             # Sensitive Variables Below. Please consider using Context or Project Environment Variables (https://circleci.com/docs/2.0/env-vars/#environment-variable-usage-options)
             FOD_API_KEY="75e8fd94-7b50-448f-864c-6910ab945eaf"
             FOD_API_SECRET="WTVTaGBmcWxDZG8yM1dtbnJrU0tHcjhgbEc-RDdP0"

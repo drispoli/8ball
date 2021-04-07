@@ -10,7 +10,7 @@ workflows:
             - unit-test
 
 jobs:
-  unit-test:
+  build:
     docker:
       - image: circleci/openjdk:8-jdk
     working_directory: ~/repo
@@ -32,6 +32,26 @@ jobs:
       - store_test_results:
           path: target/surefire-reports
 
-
+  fod-sast:
+    docker:
+      - image: fortifydocker/fortify-ci-tools:latest
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - hello-spring-mvn-V2-{{ checksum "pom.xml" }}
+            - hello-spring-mvn-V2
+      - run: mvn dependency:go-offline
+      - run:
+          name: Build 
+          command: |
+            mvn clean compile
+      - save_cache:
+          paths:
+           - ~/.m2
+          key: hello-spring-mvn-V2-{{ checksum "pom.xml" }}
+      - store_test_results:
+          path: target/surefire-reports
 
   

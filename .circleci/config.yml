@@ -53,7 +53,7 @@ jobs:
             FOD_URL="https://ams.fortify.com"
             FOD_API_URL="https://api.ams.fortify.com/"
             FOD_UPLOADER_OPTS="-ep 2 -pp 0"
-            FOD_NOTES="\"Triggered by CircleCI Pipeline $CIRCLE_PROJECT_USERNAME - $CIRCLE_BRANCH\"""
+            FOD_NOTES="\"Triggered by CircleCI Pipeline $CIRCLE_PROJECT_USERNAME - $CIRCLE_BRANCH\""
             echo FOD_RELEASE $FOD_RELEASE
             java -jar $FOD_UPLOAD -z package.zip -aurl $FOD_API_URL -purl $FOD_URL -rid $FOD_RELEASE -tc $FOD_TENANT -ac $FOD_API_KEY_SECRET $FOD_UPLOADER_OPTS -n $FOD_NOTES
 

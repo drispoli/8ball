@@ -46,7 +46,7 @@ jobs:
       - run:
           name: FoD SAST Using fortify-ci-tools 
           command: |
-            $PACKAGE_OPTS="-bt mvn" 
+            PACKAGE_OPTS="-bt mvn" 
             scancentral package $PACKAGE_OPTS -o package.zip 
             java -jar $FOD_UPLOAD -z package.zip -aurl $FOD_API_URL -purl $FOD_URL -rid "$FOD_RELEASE" -tc "$FOD_TENANT" -uc "$FOD_USERNAME" "$FOD_PAT" $FOD_UPLOADER_OPTS -n "$FOD_NOTES"
 

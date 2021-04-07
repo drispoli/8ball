@@ -46,9 +46,13 @@ jobs:
       - run:
           name: FoD SAST Using fortify-ci-tools 
           command: |
-            # Packaging the project for FoD
+            # Packaging the project for FoD.
+            # For other build tools (-bt none), add your build commands to download necessary dependencies and prepare according to the Fortify on Demand Packaging documentation.
+            # ScanCentral Client documentation is located at https://www.microfocus.com/documentation/fortify-software-security-center/ 
+
             PACKAGE_OPTS="-bt mvn" 
             scancentral package $PACKAGE_OPTS -o package.zip
+            
             # Uploading the packaged project to FoD 
             FOD_URL="https://ams.fortify.com"
             FOD_API_URL="https://api.ams.fortify.com/"
@@ -59,7 +63,7 @@ jobs:
             FOD_API_SECRET="WTVTaGBmcWxDZG8yM1dtbnJrU0tHcjhgbEc-RDdP0"
             FOD_RELEASE="242683"
             FOD_TENANT="FranklinBank"
-            echo FOD_RELEASE $FOD_RELEASE
+            
             java -jar $FOD_UPLOAD -z package.zip -aurl $FOD_API_URL -purl $FOD_URL -rid $FOD_RELEASE -tc $FOD_TENANT -ac $FOD_API_KEY $FOD_API_SECRET $FOD_UPLOADER_OPTS -n "$FOD_NOTES"
 
   
